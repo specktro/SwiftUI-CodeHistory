@@ -2,12 +2,17 @@
 //  ContentView.swift
 //  Code History
 //
-//  Created by Miguel Angel Gómez Rivero on 21/09/24.
+//  Created by specktro on 21/09/24.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    let question = Question(
+        questionText: "What was the first computer bug?",
+        possibleAnswers: ["Ant", "Beetle", "Moth", "Fly"],
+        correctAnswerIndex: 2)
+        
     let mainColor = Color(red: 20/255, green: 28/255, blue: 58/255)
     let accentColor = Color(red: 48/255, green: 105/255, blue: 240/255)
     
@@ -20,7 +25,7 @@ struct ContentView: View {
                     .font(.callout)
                     .multilineTextAlignment(.leading)
                     .padding()
-                Text("What was the first computer bug?")
+                Text(question.questionText)
                     .font(.largeTitle)
                     .bold()
                     .multilineTextAlignment(.leading)
@@ -29,43 +34,22 @@ struct ContentView: View {
                     Button {
                         print("Tapped on Choice 1")
                     } label: {
-                        Text("Ant")
-                            .font(.body)
-                            .bold()
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .border(accentColor, width: 4.0)
-                            
+                        ChoiceTextView(choiceText: question.possibleAnswers[0])
                     }
                     Button {
                         print("Tapped on Choice 2")
                     } label: {
-                        Text("Beetle")
-                            .font(.body)
-                            .bold()
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .border(accentColor, width: 4)
+                        ChoiceTextView(choiceText: question.possibleAnswers[1])
                     }
                     Button {
                         print("Tapped on Choice 3")
                     } label: {
-                        Text("Month")
-                            .font(.body)
-                            .bold()
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .border(accentColor, width: 4)
+                        ChoiceTextView(choiceText: question.possibleAnswers[2])
                     }
                     Button {
                         print("Tapped on Choice 4")
                     } label: {
-                        Text("Fly")
-                            .font(.body)
-                            .bold()
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .border(accentColor, width: 4)
+                        ChoiceTextView(choiceText: question.possibleAnswers[3])
                     }
                 }
             }
