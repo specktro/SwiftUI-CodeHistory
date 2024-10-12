@@ -2,7 +2,7 @@
 //  Code_HistoryApp.swift
 //  Code History
 //
-//  Created by Miguel Angel Gómez Rivero on 21/09/24.
+//  Created by specktro on 21/09/24.
 //
 
 import SwiftUI
