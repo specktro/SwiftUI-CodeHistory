@@ -26,12 +26,7 @@ struct WelcomeView: View {
                         destination: GameView(),
                         label: {
                             HStack {
-                                Spacer()
-                                Text("Okay, let's go!")
-                                    .font(.body)
-                                    .bold()
-                                    .padding()
-                                Spacer()
+                                BottomTextView(string: "Okay let's go!")
                             }.background(GameColor.accent)
                         })
                 }
