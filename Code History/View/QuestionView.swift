@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct QuestionView: View {
+    @EnvironmentObject var viewModel: GameViewModel
     let question: Question
     
     var body: some View {
@@ -18,21 +19,31 @@ struct QuestionView: View {
                 .multilineTextAlignment(.leading)
             Spacer()
             HStack {
-                ForEach(question.possibleAnswers, id: \.self) { answer in
+                ForEach(0..<question.possibleAnswers.count) { answerIndex in
                     Button {
-                        print("Tapped on option with the text: \(answer)")
+                        print("Tapped on option with the text: \(question.possibleAnswers[answerIndex])")
+                        viewModel.makeGuess(atIndex: answerIndex)
                     } label: {
-                        ChoiceTextView(choiceText: answer)
+                        ChoiceTextView(choiceText: question.possibleAnswers[answerIndex])
+                            .background(viewModel.color(forOptionIndex: answerIndex))
                     }
-
+                    .disabled(viewModel.guessWasMade)
                 }
+            }
+            
+            if viewModel.guessWasMade {
+                Button {
+                    viewModel.displayNextScreen()
+                } label: {
+                    BottomTextView(string: "Next")
+                }
+
             }
         }
     }
 }
 
 #Preview {
-    QuestionView(question: Question(questionText: "What was the first computer bug?",
-                                    possibleAnswers: ["Ant", "Beetle", "Moth", "Fly"],
-                                    correctAnswerIndex: 2))
+    QuestionView(question: Game().currentQuestion)
+    .environmentObject(GameViewModel())
 }
