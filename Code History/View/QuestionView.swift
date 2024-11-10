@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QuestionView: View {
-    @EnvironmentObject var viewModel: GameViewModel
+    @Environment(GameViewModel.self) private var viewModel
     let question: Question
     
     var body: some View {
@@ -19,7 +19,7 @@ struct QuestionView: View {
                 .multilineTextAlignment(.leading)
             Spacer()
             HStack {
-                ForEach(0..<question.possibleAnswers.count) { answerIndex in
+                ForEach(0..<question.possibleAnswers.count, id: \.self) { answerIndex in
                     Button {
                         print("Tapped on option with the text: \(question.possibleAnswers[answerIndex])")
                         viewModel.makeGuess(atIndex: answerIndex)
@@ -45,5 +45,5 @@ struct QuestionView: View {
 
 #Preview {
     QuestionView(question: Game().currentQuestion)
-    .environmentObject(GameViewModel())
+        .environment(GameViewModel())
 }
